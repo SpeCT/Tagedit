@@ -16,19 +16,30 @@ $.fn.autoGrowInput = function(o) {
         var minWidth = o.minWidth || $(this).width(),
             val = '',
             input = $(this),
+            fontSize = input.css('fontSize'),
+            fontFamily = input.css('fontFamily'),
+            fontWeight = input.css('fontWeight'),
             testSubject = $('<tester/>').css({
                 position: 'absolute',
                 top: -9999,
                 left: -9999,
                 width: 'auto',
-                fontSize: input.css('fontSize'),
-                fontFamily: input.css('fontFamily'),
-                fontWeight: input.css('fontWeight'),
+                fontSize: fontSize,
+                fontFamily: fontFamily,
+                fontWeight: fontWeight,
                 letterSpacing: input.css('letterSpacing'),
                 whiteSpace: 'nowrap'
             }),
             check = function() {
                 
+                if (!fontSize) {
+                    testSubject.css({
+                        fontSize: fontSize = input.css('fontSize'),
+                        fontFamily: fontFamily = input.css('fontFamily'),
+                        fontWeight: fontWeight = input.css('fontWeight')
+                    })
+                }
+
                 if (val === (val = input.val())) {return;}
                 
                 // Enter new content into testSubject
